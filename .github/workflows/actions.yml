@@ -6,7 +6,7 @@ jobs:
     steps:
       - name: Simple JS Action
         id: greet
-        uses: actions/hello-worrld-javascript-action@v1
+        uses: https://github.com/actions/hello-world-javascript-action
         with: 
           who-to-greet: 'Nuran Elanzeery'
       - name: Log Greeting Time
