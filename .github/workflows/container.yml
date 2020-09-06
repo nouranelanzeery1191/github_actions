@@ -1,8 +1,24 @@
 name: Container
 on: push
 
-
 jobs:
+  docker-steps:
+    runs-on: ubuntu-latest
+    container:
+      image: node:10.18.0-jessie 
+    steps:
+      - name: Log node version
+        run: node -v
+      - name: Steps with Docker
+        uses: docker://node:12.14.1-alpine3.10
+        with: 
+          entrypoint: /bin/echo
+          args: Hello Woorld! 
+      - name: Log Node Version as an ENTRYPOOINT
+        uses: docker://node:12.14.1-alpine3.10
+        with: 
+          entrypoint: /usr/local/bin/node
+          args: -v
   node-docker:
     runs-on: ubuntu-latest
     #container: 
