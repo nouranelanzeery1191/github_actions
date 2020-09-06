@@ -18,7 +18,7 @@ jobs:
           - 27017:27017
     steps:
       - name: Post a user to the DB
-        run: "curl -X POST http://localhoost:3001/api/user -H 'content-Type: application/json' -d ' {\"username\": \"hello\", \"adress\": \"addressDetails\" }'"
+        run: "curl -X POST http://localhost:3001/api/user -H 'content-Type: application/json' -d ' {\"username\": \"hello\", \"adress\": \"addressDetails\" }'"
       - name: Get All users
-        run: curl http://localhoost:3001/api/user 
+        run: curl http://localhost:3001/api/user 
       
