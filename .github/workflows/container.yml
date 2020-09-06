@@ -20,6 +20,9 @@ jobs:
           entrypoint: /usr/local/bin/node
           args: -v
       - uses: actions/checkout@v1
+        run: |
+          pwd
+          ls -al
       - name: Change File priviledge
         run: chmod +x $HOME/script.sh
       - name: Run a shell script
