@@ -13,12 +13,20 @@ jobs:
         uses: docker://node:12.14.1-alpine3.10
         with: 
           entrypoint: /bin/echo
-          args: Hello Woorld! 
+          args: Hello World! 
       - name: Log Node Version as an ENTRYPOOINT
         uses: docker://node:12.14.1-alpine3.10
         with: 
           entrypoint: /usr/local/bin/node
           args: -v
+      - uses: actions/checkout@v1
+      - name: Change File priviledge
+        run: chmod +x $HOME/script.sh
+      - name: Run a shell script
+        uses: docker://node:12.14.1-alpine3.10
+        with: 
+          entrypoint: ./script.sh
+          args: "Input Argument"
   node-docker:
     runs-on: ubuntu-latest
     #container: 
