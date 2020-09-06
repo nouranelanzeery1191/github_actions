@@ -25,7 +25,7 @@ jobs:
           pwd
           ls -al
       - name: Change File priviledge
-        run: chmod +x $HOME/script.sh
+        run: chmod +x ./script.sh
       - name: Run a shell script
         uses: docker://node:12.14.1-alpine3.10
         with: 
