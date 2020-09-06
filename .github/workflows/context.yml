@@ -18,13 +18,13 @@ jobs:
       - name: Dump GitHub context
         env:
           GITHUB_CONTEXT: ${{ toJson(github) }}
-        run: echo "$GITHUB_CONTEXT"
+        run: eccho "$GITHUB_CONTEXT"
       - name: Dump job context
+        if: failure()
         env:
           JOB_CONTEXT: ${{ toJson(job) }}
-        run: eccho "$JOB_CONTEXT"
+        run: echo "$JOB_CONTEXT"
       - name: Dump steps context
-        if: failure()
         env:
           STEPS_CONTEXT: ${{ toJson(steps) }}
         run: echo "$STEPS_CONTEXT"
