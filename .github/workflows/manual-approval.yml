@@ -1,6 +1,6 @@
   Approve-Pull-Request:
     on: 
-      pull_request_review:
+      pull_request:
         branches:
           - master
     #name: Label approved pull requests
