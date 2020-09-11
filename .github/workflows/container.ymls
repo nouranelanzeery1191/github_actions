@@ -57,5 +57,4 @@ jobs:
       - name: Post a user to the DB
         run: "curl -X POST http://localhost:3001/api/user -H 'content-Type: application/json' -d ' {\"username\": \"hello\", \"address\": \"addressDetails\" }'"
       - name: Get All users
-        run: curl http://localhost:3001/api/users 
-      
+        run: curl http://localhost:3001/api/users
