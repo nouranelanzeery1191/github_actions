@@ -2,9 +2,6 @@
   on: 
     pull_request:
       types: [closed]
-      branches:
-        - master
-        - feature
   jobs:
     ManualApprovalStep:
       name: PullRequestStatus
@@ -12,5 +9,5 @@
       #needs: label-added
       steps:
         - name: Check Labels
-          if: pull_request.types == closed && pull_request.merged == true 
+          if: github.event.pull_request.types == closed && github.event.pull_request.merged == true 
           run: echo "Manual Approve passed"
