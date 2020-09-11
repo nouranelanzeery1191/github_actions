@@ -6,10 +6,7 @@
     ManualApprovalStep:
       name: PullRequestStatus
       runs-on: ubuntu-latest
-      #needs: label-added
       steps:
         - name: Check Labels
           if:  github.event.pull_request.merged == true 
-          #github.event.pull_request.types == closed &&
-          #creating a pull request
           run: echo "Manual Approve passed"
