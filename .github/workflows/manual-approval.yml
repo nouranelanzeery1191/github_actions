@@ -9,5 +9,6 @@
       #needs: label-added
       steps:
         - name: Check Labels
-          if: github.event.pull_request.types == closed && github.event.pull_request.merged == true 
+          if:  github.event.pull_request.merged == true 
+          #github.event.pull_request.types == closed &&
           run: echo "Manual Approve passed"
