@@ -1,5 +1,7 @@
 name: Container
 on: [push]
+branches:
+  - feature
 jobs:
   docker-steps:
     runs-on: ubuntu-latest
