@@ -75,7 +75,7 @@ jobs:
         run: pwd
         shell: bash
   ManualApprovalStep:
-    if: github.event.pull_request.merged
+    if: github.event.pull_request.merged || github.event.push.branch == 'master'
     runs-on: ubuntu-latest
     steps:
       - name: Take Action on Merge
