@@ -43,24 +43,6 @@ jobs:
         env: 
           SLACK_WEBHOOK: ${{ secrets.SLACK_WEBHOOK }}
           SLACK_MESSAGE: Hello From Slack!
-  node-docker:
-    runs-on: ubuntu-latest
-    #container: 
-    #  image: node:13.5.0-alpine3.10 
-    services:
-      app:
-        image: alialaa17/node-api
-        ports: 
-          - 3001:3000
-      mongo:
-        image: mongo
-        ports:
-          - 27017:27017
-    steps:
-      - name: Post a user to the DB
-        run: "curl -X POST http://localhost:3001/api/user -H 'content-Type: application/json' -d ' {\"username\": \"hello\", \"address\": \"addressDetails\" }'"
-      - name: Get All users
-        run: curl http://localhost:3001/api/users
 ---
 name: Shell Commands
 on: [pull_request]
