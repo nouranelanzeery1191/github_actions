@@ -17,11 +17,9 @@
     ManualApprovalStep:
       name: PullRequestStatus
       runs-on: ubuntu-latest
-      if: github.event.labels == 'approved'
       #needs: ['AddingLabels']
       steps:
         - name: Check Labels
-          #if: github.event.pull_request.label.name == 'approved'
-    #      if: ${{ github.event.pull_request.label.name == 'approved' }}
+          if: github.event.pull_request.label.name == 'approved'
           #github.event.pull_request.merged && github.event.label.name == approved
           run: echo "Manual Approve passed"
