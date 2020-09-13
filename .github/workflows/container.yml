@@ -1,7 +1,15 @@
 name: Container
-on: [push]
-branches:
-  - feature
+on: 
+  pull_request:
+    types: [ closed, labeled ]
+    branches:
+      - master
+  push:
+    branches:
+      - master
+      - feature
+    #branches-ignore:
+    #  - develop
 jobs:
   docker-steps:
     runs-on: ubuntu-latest

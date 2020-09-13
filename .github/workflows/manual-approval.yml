@@ -1,7 +1,9 @@
   name: Approve-Pull-Request
   on: 
     pull_request:
-      types: [ closed, labeled ]
+      types: [closed]
+      branches:
+        - master
   jobs:
     ManualApprovalStep:
       name: PullRequestStatus
@@ -9,5 +11,4 @@
       runs-on: ubuntu-latest
       steps:
         - name: Take Action on Merge
-          
-          run: echo "Manual Approve passed"
+          run: echo "Manual Approve passed successfully"
