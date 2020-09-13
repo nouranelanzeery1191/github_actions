@@ -6,7 +6,7 @@ on:
       - master
   push:
     branches:
-      - master
+      #- master
       - feature
     #branches-ignore:
     #  - develop
@@ -75,7 +75,7 @@ jobs:
         run: pwd
         shell: bash
   ManualApprovalStep:
-    if: github.event.pull_request.merged || github.event.base.ref== 'refs/heads/master'
+    if: github.event.pull_request.merged
     runs-on: ubuntu-latest
     steps:
       - name: Take Action on Merge
