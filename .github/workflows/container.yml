@@ -93,5 +93,6 @@ jobs:
     needs: label-added
     steps:
       - name: Check Labels
-        if:  github.event.pull_request.merged && github.event.pull_request.labels == approved
+        if:  github.event.pull_request.merged 
+        #&& github.event.pull_request.labels == approved
         run: echo "Manual Approve passed"
