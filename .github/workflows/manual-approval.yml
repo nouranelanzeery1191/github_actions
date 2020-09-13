@@ -1,7 +1,7 @@
   name: Approve-Pull-Request
   on: 
     pull_request:
-      types: [closed, labeled]
+      types: [ closed, labeled ]
   jobs:
     #AddingLabels:
     #  runs-on: ubuntu-latest
@@ -20,5 +20,5 @@
       #needs: ['AddingLabels']
       steps:
         - name: Check Labels
-          if:  github.event.pull_request.merged && github.event.label.name == approved
+          if: github.event.pull_request.merged
           run: echo "Manual Approve passed"
