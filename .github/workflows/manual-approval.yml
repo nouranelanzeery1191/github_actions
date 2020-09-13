@@ -21,6 +21,6 @@
       steps:
         - name: Check Labels
           #if: github.event.pull_request.label.name == 'approved'
-          if: ${{ github.event.label.name == 'approved' }}
+          if: ${{ github.event.pull_request.label.name == 'approved' }}
           #github.event.pull_request.merged && github.event.label.name == approved
           run: echo "Manual Approve passed"
