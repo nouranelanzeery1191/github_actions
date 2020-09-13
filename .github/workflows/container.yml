@@ -1,6 +1,5 @@
 name: Container
-on: push
-
+on: [push]
 jobs:
   docker-steps:
     runs-on: ubuntu-latest
@@ -35,26 +34,30 @@ jobs:
         with: 
           entrypoint: ./script.sh
           args: "Input Argument"
-      - name: Send a Slack Message
-        uses: docker://technosophos/slack-notify
-        env: 
-          SLACK_WEBHOOK: ${{ secrets.SLACK_WEBHOOK }}
-          SLACK_MESSAGE: Hello From Slack!
-  node-docker:
+      #- name: Send a Slack Message
+      #  uses: docker://technosophos/slack-notify
+      #  env: 
+      #    SLACK_WEBHOOK: ${{ secrets.SLACK_WEBHOOK }}
+  run-shell-commands: 
     runs-on: ubuntu-latest
-    #container: 
-    #  image: node:13.5.0-alpine3.10 
-    services:
-      app:
-        image: alialaa17/node-api
-        ports: 
-          - 3001:3000
-      mongo:
-        image: mongo
-        ports:
-          - 27017:27017
     steps:
-      - name: Post a user to the DB
-        run: "curl -X POST http://localhost:3001/api/user -H 'content-Type: application/json' -d ' {\"username\": \"hello\", \"address\": \"addressDetails\" }'"
-      - name: Get All users
-        run: curl http://localhost:3001/api/users
+      - name: echo a string
+        run: echo "Hello World!"
+      - name: multiline script
+        run: |
+          node -v 
+          npm -v
+      - name: python command
+        run: |
+          import platform
+          print(platform.processor())
+        shell: python
+  run-windows-commands:
+    runs-on: windows-latest
+    needs: ['run-shell-commands']
+    steps:
+      - name: Directory PowerShell
+        run: Get-Location
+      - name: Directory Bash
+        run: pwd
+        shell: bash
