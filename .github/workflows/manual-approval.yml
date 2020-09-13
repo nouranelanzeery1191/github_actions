@@ -20,5 +20,5 @@
       #needs: ['AddingLabels']
       steps:
         - name: Check Labels
-          if:  github.event.pull_request.merged && github.event.pull_request.labels = approved
+          if:  github.event.pull_request.merged && github.event.labels = approved
           run: echo "Manual Approve passed"
