@@ -1,5 +1,8 @@
 name: Container
-on: push
+on: [push]
+#branches:
+#  - master
+#  - feature
 
 jobs:
   docker-steps:
@@ -8,7 +11,7 @@ jobs:
       image: node:10.18.0-jessie 
     steps:
       - name: Log node version
-        run: node -vv
+        run: node -v
       - name: Steps with Docker
         uses: docker://node:12.14.1-alpine3.10
         with: 
@@ -58,3 +61,56 @@ jobs:
         run: "curl -X POST http://localhost:3001/api/user -H 'content-Type: application/json' -d ' {\"username\": \"hello\", \"address\": \"addressDetails\" }'"
       - name: Get All users
         run: curl http://localhost:3001/api/users
+---
+name: Shell Commands
+on: [pull_request]
+jobs:
+  run-shell-commands: 
+    runs-on: ubuntu-latest
+    steps:
+      - name: echo a string
+        run: echo "Hello World!"
+      - name: multiline script
+        run: |
+          node -v 
+          npm -v
+      - name: python command
+        run: |
+          import platform
+          print(platform.processor())
+        shell: python
+  run-windows-commands:
+    runs-on: windows-latest
+    needs: ['run-shell-commands']
+    steps:
+      - name: Directory PowerShell
+        run: Get-Location
+      - name: Directory Bash
+        run: pwd
+        shell: bash
+---
+name: Approve-Pull-Request
+on: 
+  pull_request:
+    types: [closed]
+jobs:
+  labelWhenApproved:
+        name: Label when approved
+        runs-on: ubuntu-latest
+        id: label-added
+        steps:
+        - name: Label when approved
+          uses: pullreminders/label-when-approved-action@master
+          env:
+            APPROVALS: "1"
+            GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+            ADD_LABEL: "approved"
+            REMOVE_LABEL: "awaiting%20review"
+  ManualApprovalStep:
+    name: PullRequestStatus
+    runs-on: ubuntu-latest
+    needs: label-added
+    steps:
+      - name: Check Labels
+        if:  github.event.pull_request.merged && github.event.pull_request.labels == approved
+        run: echo "Manual Approve passed"
