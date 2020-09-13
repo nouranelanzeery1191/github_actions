@@ -44,6 +44,7 @@ jobs:
           SLACK_WEBHOOK: ${{ secrets.SLACK_WEBHOOK }}
           SLACK_MESSAGE: Hello From Slack!
 ---
+
 name: Shell Commands
 on: [pull_request]
 jobs:
@@ -70,7 +71,9 @@ jobs:
       - name: Directory Bash
         run: pwd
         shell: bash
+
 ---
+  
 name: Approve-Pull-Request
 on: 
   pull_request:
