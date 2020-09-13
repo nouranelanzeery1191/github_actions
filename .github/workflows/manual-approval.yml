@@ -4,12 +4,6 @@
       types: [ closed, labeled ]
       branches:
         - master
-    push:
-      branches:
-        - master
-        - feature
-      branches-ignore:
-        - develop
   jobs:
     ManualApprovalStep:
       name: PullRequestStatus
