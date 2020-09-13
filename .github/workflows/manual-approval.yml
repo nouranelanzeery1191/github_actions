@@ -17,7 +17,7 @@
     ManualApprovalStep:
       name: PullRequestStatus
       runs-on: ubuntu-latest
-      if: ${{ github.event.review.state == 'approved' }}
+      if: ${{ github.event.labels == 'approved' }}
       #needs: ['AddingLabels']
       steps:
         - name: Check Labels
