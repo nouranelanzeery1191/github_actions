@@ -8,8 +8,8 @@ on:
     branches:
       - master
       - feature
-    branches-ignore:
-      - develop
+    #branches-ignore:
+    #  - develop
 jobs:
   docker-steps:
     runs-on: ubuntu-latest
