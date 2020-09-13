@@ -8,7 +8,7 @@ jobs:
       image: node:10.18.0-jessie 
     steps:
       - name: Log node version
-        run: node -v
+        run: node -vv
       - name: Steps with Docker
         uses: docker://node:12.14.1-alpine3.10
         with: 
