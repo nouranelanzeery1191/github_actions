@@ -16,6 +16,7 @@
     #        REMOVE_LABEL: "awaiting%20review"
     AutoLabels:
       name: Labels
+      if: github.event.pull_request.labels.*.name == 'approved'
       runs-on: ubuntu-latest
       steps:
         - name: Check Labels
