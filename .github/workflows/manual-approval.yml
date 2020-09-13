@@ -1,0 +1,25 @@
+  name: Approve-Pull-Request
+  on: 
+    pull_request:
+      types: [closed]
+  jobs:
+    AddingLabels:
+      runs-on: ubuntu-latest
+      if: github.event.pull_request.action == 'closed'
+      steps:
+        - name: Label when approved
+          uses: pullreminders/label-when-approved-action@master
+          env:
+            APPROVALS: "1"
+            GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+            ADD_LABEL: "approved"
+            REMOVE_LABEL: "awaiting%20review"
+
+    ManualApprovalStep:
+      name: PullRequestStatus
+      runs-on: ubuntu-latest
+      needs: ['AddingLabels']
+      steps:
+        - name: Check Labels
+          if:  github.event.pull_request.merged && github.event.pull_request.labels == approved
+          run: echo "Manual Approve passed"
