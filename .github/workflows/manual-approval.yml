@@ -14,11 +14,17 @@
     #        GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
     #        ADD_LABEL: "approved"
     #        REMOVE_LABEL: "awaiting%20review"
-    ManualApprovalStep:
-      name: PullRequestStatus
+    AutoLabels:
+      name: Labels
       runs-on: ubuntu-latest
-      #needs: ['AddingLabels']
       steps:
         - name: Check Labels
-          if: github.event.pull_request.merged
-          run: echo "Manual Approve passed"
+          if: github.event.pull_request.labels.*.name == 'approved'
+          run: echo "It worked"   
+    #ManualApprovalStep:
+    #  name: PullRequestStatus
+    #  runs-on: ubuntu-latest
+    #  steps:
+    #    - name: Take Action on Merge
+    #      if: github.event.pull_request.merged
+    #      run: echo "Manual Approve passed"
