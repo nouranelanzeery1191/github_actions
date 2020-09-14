@@ -1,8 +1,8 @@
 name: Actions Workflow
-#on: [push, pull_request]
-on: 
-  repository_dispatch:
-    types: [build] 
+on: [push, pull_request]
+#on: 
+#  repository_dispatch:
+#    types: [build] 
   #schedule:
   #  - cron: "15 * * * *" 
   #  - cron: "16 * * * *" 
