@@ -53,6 +53,6 @@ jobs:
     steps:
       - name: List Files
         run: |
-          echo "${{ steps.hello.outputs.time }}"
+          echo "${{ jobs.hello.outputs.time }}"
           echo $HELLO
 
