@@ -85,5 +85,5 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - name: Take Action on Merge
-        run: echo "Manual Approve passed successfully"
+        run: echo "Manual Approve passed successfully change"
     
