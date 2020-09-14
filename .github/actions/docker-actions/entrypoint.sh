@@ -1,10 +1,10 @@
 #!/bin/sh -e
 
-if [ failure ]
-then
-  echo 'error'
-  exit 1
-fi
+#if [ failure ]
+#then
+#  echo 'error'
+#  exit 1
+#fi
 
 echo "::debug ::Debug Message::"
 echo "::warning ::Warning Message::"

@@ -49,6 +49,7 @@ jobs:
           echo $HELLO
   check-github-actions:
     runs-on: ubuntu-latest
+    needs: run-github-actions
     steps:
       - name: List Files
         run: |
