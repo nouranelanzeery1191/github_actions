@@ -1,6 +1,6 @@
 #!/bin/sh -e
 
-if [ true ]
+if [ failure ]
 then
   echo 'error'
   exit 1
