@@ -7,8 +7,8 @@ on: [push, pull_request]
   #  - cron: "15 * * * *" 
   #  - cron: "16 * * * *" 
   #push: {}
-  pull_request:
-    types: [closed, assigned, opened, reopened]
+  #pull_request:
+  #  types: [closed, assigned, opened, reopened]
 jobs: 
   run-github-actions:
     runs-on: ubuntu-latest
