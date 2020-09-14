@@ -39,11 +39,11 @@ jobs:
         run: echo "${{ steps.greet.outputs.time }}"
       
       - name: Simple Docker Action
-        id: hello
         uses: ./.github/actions/docker-actions
+        id: hello
         with: 
           who-to-greet: 'Nuran Elanzeery'
-      - name: Log Greeting Time
+      - name: Log Hello Time
         run: | 
           echo "${{ steps.hello.outputs.time }}"
           echo $HELLO
