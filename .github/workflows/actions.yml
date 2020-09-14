@@ -47,4 +47,11 @@ jobs:
         run: | 
           echo "${{ steps.hello.outputs.time }}"
           echo $HELLO
+  check-github-actions:
+    runs-on: ubuntu-latest
+    steps:
+      - name: List Files
+        run: |
+          echo "${{ steps.hello.outputs.time }}"
+          echo $HELLO
 
