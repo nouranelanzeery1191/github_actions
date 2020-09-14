@@ -12,6 +12,9 @@ on: [push, pull_request]
 jobs: 
   run-github-actions:
     runs-on: ubuntu-latest
+    outputs:
+      output1: ${{ steps.hello.outputs.time }}
+      output2: ${{ steps.hello.outputs.HELLO }}
     steps:
       - name: List Files
         run: |
@@ -53,6 +56,6 @@ jobs:
     steps:
       - name: List Files
         run: |
-          echo "${{ jobs.hello.outputs.time }}"
-          echo $HELLO
+          echo "${{ needs.run-github-actions.outputs.output1 }}"
+          #echo $HELLO
 
