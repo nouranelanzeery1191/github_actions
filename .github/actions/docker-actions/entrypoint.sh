@@ -23,4 +23,5 @@ echo 'some stuff'
 echo 'some stuff'
 
 echo '::endgroup::'
+export HELLO="HELLO"
 echo '::set-env name=HELLO::hello'
