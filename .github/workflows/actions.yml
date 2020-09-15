@@ -56,5 +56,5 @@ jobs:
       - name: List Files
         run: |
           echo "${{ needs.run-github-actions.outputs.output1 }}"
-          echo ${{ github.env.HELLO }}
+          echo ${{ env.HELLO }}
 
