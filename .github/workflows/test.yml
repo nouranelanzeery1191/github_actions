@@ -46,7 +46,7 @@ jobs:
           team-reviewers: |
             owners
             maintainers
-          milestone: 1
+          milestone: "Milestone1"
           draft: false
       - name: Check output
         run: |
