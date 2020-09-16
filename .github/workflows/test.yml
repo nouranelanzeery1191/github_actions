@@ -41,8 +41,8 @@ jobs:
           labels: |
             report
             automated pr
-          assignees: nouranelanzeery1191,nouranelanzeery2
-          reviewers: nouranelanzeery1191,nouran-elanzeery2
+          assignees: nouranelanzeery1191
+          reviewers: nouranelanzeery1191
           team-reviewers: |
             owners
             maintainers
