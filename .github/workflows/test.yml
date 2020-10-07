@@ -76,3 +76,6 @@ jobs:
  #       - name: Check outputs
  #         run: |
  #           echo "Pull Request Number - ${{ steps.cpr.outputs.pull-request-number }}" 
+# - name: Confirm Changes
+        #if: steps.changed-front.outputs.changed == 'true'
+        ##run: echo "Diff command worked"

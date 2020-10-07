@@ -1,0 +1,56 @@
+# name: 'VPC Provisioning'
+# on:
+#   push:
+#     branches:
+#       - feature/BCA-*
+name: 'Live Env.'
+on:
+   workflow_dispatch:
+    inputs:
+      version:
+        description: Git Ref (Mandatory)
+        default: v1.0.0
+        required: true
+      git-ref: #to return to a previous commit
+        description: Git Ref (Optional)    
+        required: false
+jobs:
+  ProvisionSharedResources: 
+    runs-on: ubuntu-latest
+    strategy: 
+      matrix: 
+        environment: ["infra"]
+        resources: ["vpc_setup"]     
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v2
+        with:
+          fetch-depth: 100
+      - name: Check For Changes
+        uses: marceloprado/has-changed-path@v1
+        id: changed-front
+        with:
+          paths: ./200_cloud_infrastructure/100_infra_account/${{ matrix.resources }}
+      - name: Configure Infra_AWS_Credentials
+        uses: aws-actions/configure-aws-credentials@v1
+        with:
+          aws-access-key-id: ${{ secrets.INFRA_AWS_ACCESS_KEY_ID }}
+          aws-secret-access-key: ${{ secrets.INFRA_AWS_SECRET_ACCESS_KEY }}
+          aws-region: "eu-central-1"
+      - name: Install Terraform
+        uses: hashicorp/setup-terraform@v1
+        with:
+           terraform_version: 0.12.26
+        #if: steps.changed-front.outputs.changed == 'true'
+      - name: Plan_Infra_Resources
+        #if: steps.changed-front.outputs.changed == 'true'
+        run: |
+            cd ./200_cloud_infrastructure/100_infra_account/${{ matrix.resources }}
+            chmod +x ./resource_script/30_vpc_setup.sh
+            ./resource_script/30_vpc_setup.sh "plan" "${{ matrix.environment }}"
+      # - name: Deploy Infra Resources
+      #   #if: steps.changed-front.outputs.changed == 'true'
+      #   run: |
+      #       cd ./200_cloud_infrastructure/210_infra_account/${{ matrix.resources }}
+      #       chmod +x ./resource_script/30_vpc_setup.sh
+      #       ./resource_script/30_vpc_setup.sh "apply" "${{ matrix.environment }}" 
