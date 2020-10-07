@@ -1,3 +1,4 @@
 #!/bin/sh
-echo $1 $2
+echo $1 
+eccho $2
 echo "Hello Script"

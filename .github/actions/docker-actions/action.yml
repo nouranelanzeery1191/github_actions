@@ -1,0 +1,17 @@
+name: Docker Actions
+author: nouranelanzeery1191
+description: Dcoker Action
+inputs:
+  who-to-greet:
+    description: "who-to-greet"
+    required: true
+    default: Nuran
+outputs:
+  time: 
+    description: "The greeting time"
+runs:
+  using: "docker"
+  image: "Dockerfile"
+  #entrypoint:
+  args: 
+    - ${{ inputs.who-to-greet }}

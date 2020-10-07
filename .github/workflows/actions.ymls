@@ -1,17 +1,19 @@
 name: Actions Workflow
-#on: [push, pull_request]
-on: 
-  repository_dispatch:
-    types: [build] 
+on: [push, pull_request]
+#on: 
+#  repository_dispatch:
+#    types: [build] 
   #schedule:
   #  - cron: "15 * * * *" 
   #  - cron: "16 * * * *" 
   #push: {}
-  pull_request:
-    types: [closed, assigned, opened, reopened]
+  #pull_request:
+  #  types: [closed, assigned, opened, reopened]
 jobs: 
   run-github-actions:
     runs-on: ubuntu-latest
+    outputs:
+      output1: ${{ steps.hello.outputs.time }}
     steps:
       - name: List Files
         run: |
@@ -38,3 +40,23 @@ jobs:
       - name: Log Greeting Time
         run: echo "${{ steps.greet.outputs.time }}"
       
+      - name: Simple Docker Action
+        uses: ./.github/actions/docker-actions
+        id: hello
+        with: 
+          who-to-greet: 'Nuran Elanzeery'
+      - name: Log Hello Time
+        run: | 
+          echo "${{ steps.hello.outputs.time }}"
+          echo $HELLO
+          echo "export HELLO=hello" > ~/.bashrc
+  check-github-actions:
+    runs-on: ubuntu-latest
+    needs: run-github-actions
+    steps:
+      - name: List Files
+        run: |
+          echo "${{ needs.run-github-actions.outputs.output1 }}"
+          source ~/.bashrc
+          echo $HELLO
+

@@ -1,0 +1,18 @@
+name: Conditional Deploy
+on: push
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    env:
+      current-path: ./.github/workflows/
+    steps:
+      - uses: actions/checkout@v2
+        with:
+          fetch-depth: 100
+      - uses: marceloprado/has-changed-path@v1
+        id: changed-front
+        with:
+          paths: "${current-path}"
+      - name: Deploy front
+        if: steps.changed-front.outputs.changed == 'true'
+        run: echo "Diff command worked"
