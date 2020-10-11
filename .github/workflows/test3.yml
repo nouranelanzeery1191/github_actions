@@ -32,7 +32,7 @@ jobs:
         run: | 
           echo "This is running on branch ${GITHUB_REF##*/}"
       - name: Test if condition
-        if: steps.changed-front.outputs.changed == 'true' && github.ref == 'master' && github.event.pull_request.merged == 'true'
+        if: steps.changed-front.outputs.changed == true && github.ref == master && github.event.pull_request.merged == true
         run: |
           echo "if condition worked"
             echo "running on branch ${GITHUB_REF##*/}"
