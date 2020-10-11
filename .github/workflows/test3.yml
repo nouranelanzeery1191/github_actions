@@ -5,7 +5,7 @@ on:
       - feature
       #- master
   pull_request:
-    #types: [closed]
+    types: [closed]
     branches:
         - master
 jobs:
@@ -30,8 +30,8 @@ jobs:
           echo "This is running on branch ${GITHUB_REF##*/}"
       - name: Test if condition
         #if: github.event_name == 'push' && github.event.pull_request.merged
-        if: github.ref == '/refs/heads/master' 
         #&& github.event.pull_request.merged == 'true'
         run: |
           echo "if condition worked"
           echo "running on branch ${GITHUB_REF##*/}"
+        if: github.ref == '/refs/heads/master' 
