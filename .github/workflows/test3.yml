@@ -3,6 +3,7 @@ on:
   push:
     branches:
       - feature
+      #- master
   pull_request:
     #types: [closed]
     branches:
@@ -25,10 +26,12 @@ jobs:
         with:
           paths: ./github_actions/.github/workflows
       - name: Print Curent Branch name
-        run: echo "This is running on branch ${GITHUB_REF##*/}"
+        run: | 
+          echo "This is running on branch ${GITHUB_REF##*/}"
       - name: Test if condition
         #if: github.event_name == 'push' && github.event.pull_request.merged
-        if: github.ref == '/ref/heads/master' && github.event.pull_request.merged == 'true'
+        if: github.ref == '/ref/heads/master' 
+        #&& github.event.pull_request.merged == 'true'
         run: |
           echo "if condition worked"
           echo "running on branch ${GITHUB_REF##*/}"
