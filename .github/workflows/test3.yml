@@ -30,7 +30,8 @@ jobs:
           echo "This is running on branch ${GITHUB_REF##*/}"
       - name: Test if condition
         #if: github.event_name == 'push' && github.event.pull_request.merged
-        if: github.ref == '/ref/heads/master' 
+        if: ${GITHUB_REF##*/} == 'master'
+        #github.ref == '/ref/heads/master' 
         #&& github.event.pull_request.merged == 'true'
         run: |
           echo "if condition worked"
