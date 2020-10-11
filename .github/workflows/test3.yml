@@ -24,7 +24,10 @@ jobs:
         uses: marceloprado/has-changed-path@v1
         id: changed-front
         with:
-          paths: ./github_actions/.github/workflows
+          paths: ./github_actions/github_actions/.github/workflows
+      - name: List o/p
+        if: steps.changed-front.outputs.changed == 'true' 
+        run: ls -al
       - name: Print Curent Branch name
         if: steps.changed-front.outputs.changed == 'true' 
         run: | 
