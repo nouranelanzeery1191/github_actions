@@ -8,7 +8,7 @@ on:
       Environment:
         description: Environment to run this workflow on   
         required: true
-        default: "live"
+        #default: "live"
   push:
     branch:
       - feature
