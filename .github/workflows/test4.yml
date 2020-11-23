@@ -1,4 +1,9 @@
 name: 'WF_Disp_input'
+
+env:
+  platform: nonlive
+  path: workflows
+
 on:
   workflow_dispatch:
     inputs:
@@ -13,9 +18,6 @@ on:
     branch:
       - feature
       - master
-env:
-  platform: nonlive
-  path: workflows
 jobs:
   createtest: 
     runs-on: ubuntu-latest
@@ -27,7 +29,7 @@ jobs:
         run: |
             echo "The current path is" ${path}
             echo "The current environment is" ${platform}
-            echo "The current environment is" ${env.platform}
+            echo "The current environment is" $platform
       - name: Checkout Repository
         uses: actions/checkout@v1
       - name: Check For Changes
