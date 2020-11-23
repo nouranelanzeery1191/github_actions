@@ -2,7 +2,7 @@ name: 'WF_Disp_input'
 
 env:
   platform: nonlive
-  path: workflows/test4.yml
+  desired: workflows/test4.yml
 
 on:
   workflow_dispatch:
@@ -27,7 +27,7 @@ jobs:
     steps:
       - name: Test variables
         run: |
-            echo "The current path is" ${path}
+            echo "The current path is" ${desired}
             echo "The current environment is" ${platform}
             echo "The current environment is" $platform
       - name: Checkout Repository
@@ -36,7 +36,7 @@ jobs:
         uses: marceloprado/has-changed-path@v1
         id: changed-front
         with:
-          paths: ./.github/${path}
+          paths: ./.github/${desired}
       - name: Print Env name
         if: steps.changed-front.outputs.changed == 'true' && env.platform == 'nonlive'
         run: |
