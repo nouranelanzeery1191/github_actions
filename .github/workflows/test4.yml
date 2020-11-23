@@ -3,6 +3,7 @@ name: 'WF_Disp_input'
 env:
   platform: nonlive
   path: workflows/test4.yml
+  Worrkflow_name: WF_Disp_input
 
 on:
   workflow_dispatch:
@@ -41,7 +42,14 @@ jobs:
         if: steps.changed-front.outputs.changed == 'true' && env.platform == 'nonlive'
         run: |
             echo "The current environment is" ${platform}
-            echo "The current environment is" $platform
+            echo "The current environment is" $platform 
+      - name: Test Badges
+        run: |
+            echo "Testing badges"
+            echo ${{ env.Worrkflow_name }}
+            echo ${GITHUB_REF#refs/heads/}
+            echo ${GITHUB_EVENT_NAME}
+            sh ./badges.sh "${{ env.Worrkflow_name }}" "${GITHUB_REF#refs/heads/}" "${GITHUB_EVENT_NAME}"
   Livetest: 
     runs-on: ubuntu-latest    
     steps: 
