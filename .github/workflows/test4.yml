@@ -29,7 +29,7 @@ jobs:
         uses: marceloprado/has-changed-path@v1
         id: changed-front
         with:
-          paths: ./.github/${path}
+          paths: ./.github/${env.path}
       - name: Print Env name
         if: steps.changed-front.outputs.changed == 'true' && env.platform == 'nonlive'
         run: |
