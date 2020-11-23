@@ -13,12 +13,15 @@ on:
     branch:
       - feature
       - master
+env:
+  environment: nonlive
+  path: workflows 
 jobs:
   createtest: 
     runs-on: ubuntu-latest
-    strategy: 
-      matrix: 
-        environment: ["nonlive"]    
+    # strategy: 
+    #   matrix: 
+    #     environment: ["nonlive"]    
     steps:
       - name: Checkout Repository
         uses: actions/checkout@v1
@@ -26,11 +29,15 @@ jobs:
         uses: marceloprado/has-changed-path@v1
         id: changed-front
         with:
-          paths: ./.github/
+          paths: ./.github/${env.path}
       - name: Print Env name
-        if: steps.changed-front.outputs.changed == 'true' && ${{ matrix.environment }} == "nonlive"
+        if: steps.changed-front.outputs.changed == 'true' && ${env.environment} == "nonlive"
         run: |
-            echo "The current environment is" ${{ matrix.environment }}
+            echo "The current environment is" ${environment}
+            echo "The current environment is" ${env.environment}
+  Livetest: 
+    runs-on: ubuntu-latest    
+    steps: 
       - name: Print Live Env.
         if: github.event.inputs.environment == 'stage'
         #steps.changed-front.outputs.changed == 'true' && ${{ github.event.inputs.var }} == live
