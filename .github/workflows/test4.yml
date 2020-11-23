@@ -32,7 +32,7 @@ jobs:
         run: |
             echo "The current environment is" ${{ matrix.environment }}
       - name: Print Live Env.
-        if: github.event.inputs.var == 'stage'
+        if: ${github.event.inputs.var} == 'stage'
         #steps.changed-front.outputs.changed == 'true' && ${{ github.event.inputs.var }} == live
         run: |
             echo "The current environment is" github.event.inputs.var
