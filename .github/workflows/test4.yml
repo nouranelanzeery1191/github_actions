@@ -7,8 +7,7 @@ on:
         required: false
       var:
         description: Environment to run this workflow on   
-        required: true
-        #default: "live"
+        required: false
   push:
     branch:
       - feature
@@ -32,6 +31,7 @@ jobs:
         run: |
             echo "The current environment is" ${{ matrix.environment }}
       - name: Print Live Env.
-        if: steps.changed-front.outputs.changed == 'true' && ${{ github.event.inputs.var }} == live
+        if: ${{ github.event.inputs.var }} == "live"
+        #steps.changed-front.outputs.changed == 'true' && ${{ github.event.inputs.var }} == live
         run: |
             echo "The current environment is" ${{ github.event.inputs.var }}
