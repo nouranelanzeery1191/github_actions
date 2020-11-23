@@ -1,0 +1,37 @@
+name: 'WF_Disp_input'
+on:
+  workflow_dispatch:
+    inputs:
+      git-ref: 
+        description: Git Ref (Optional)    
+        required: false
+      Environment:
+        description: Environment to run this workflow on   
+        required: true
+        default: "live"
+  push:
+    branch:
+      - feature
+      - master
+jobs:
+  createtest: 
+    runs-on: ubuntu-latest
+    strategy: 
+      matrix: 
+        environment: ["nonlive"]    
+    steps:
+      - name: Checkout Repository
+        uses: actions/checkout@v1
+      - name: Check For Changes
+        uses: marceloprado/has-changed-path@v1
+        id: changed-front
+        with:
+          paths: ./.github/
+      - name: Print Env name
+        if: steps.changed-front.outputs.changed == 'true' && ${{ matrix.environment }} == "nonlive"
+        run: |
+            echo "The current environment is" ${{ matrix.environment }}
+      - name: Print Live Env.
+        if: steps.changed-front.outputs.changed == 'true' && ${{ github.event.inputs.Environment }} == "live"
+        run: |
+            echo "The current environment is" ${{ github.event.inputs.Environment }}
