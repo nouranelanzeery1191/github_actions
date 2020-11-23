@@ -60,9 +60,11 @@ jobs:
           echo "${Job_Status}"
           echo "${Badge}"
           echo "${GITHUB_EVENT_NAME}"
-          echo -e "$Job_Status" >> ./README.md
-          echo -e "Hello World!" >> ./README.md
-          cat ./README.md
+          mv ./README.md ./README.txt
+          echo -e "$Job_Status" >> ./README.txt
+          echo -e "Hello World!" >> ./README.txt
+          cat ./README.txt
+          mv ./README.txt ./README.md
   Livetest: 
     runs-on: ubuntu-latest    
     steps: 
