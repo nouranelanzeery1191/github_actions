@@ -7,4 +7,6 @@ Badge="![](https://github.com/OttoPaymentHub/barracuda_partner_accounting/workfl
 
 Job_Status='${Workflow_name} "|" ${Branch_name} "|" ${GitHub_Event} "|" ${Badge}'
 
+echo "${Job_Status}"
+
 echo "${Job_Status}" > ./README.md
