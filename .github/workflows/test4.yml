@@ -5,7 +5,7 @@ on:
       git-ref: 
         description: Git Ref (Optional)    
         required: false
-      Environment:
+      var:
         description: Environment to run this workflow on   
         required: true
         #default: "live"
