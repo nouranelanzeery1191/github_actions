@@ -31,7 +31,7 @@ jobs:
         with:
           paths: ./.github/${env.path}
       - name: Print Env name
-        if: steps.changed-front.outputs.changed == 'true' && ${env.platform} == nonlive
+        if: steps.changed-front.outputs.changed == 'true' && ${env.platform} == 'nonlive'
         run: |
             echo "The current environment is" ${platform}
             echo "The current environment is" ${env.platform}
