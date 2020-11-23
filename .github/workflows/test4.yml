@@ -14,7 +14,7 @@ on:
       - feature
       - master
 env:
-  environment: nonlive
+  platform: nonlive
   path: workflows 
 jobs:
   createtest: 
@@ -31,10 +31,10 @@ jobs:
         with:
           paths: ./.github/${env.path}
       - name: Print Env name
-        if: steps.changed-front.outputs.changed == 'true' && ${env.environment} == nonlive
+        if: steps.changed-front.outputs.changed == 'true' && ${env.platform} == nonlive
         run: |
-            echo "The current environment is" ${environment}
-            echo "The current environment is" ${env.environment}
+            echo "The current environment is" ${platform}
+            echo "The current environment is" ${env.platform}
   Livetest: 
     runs-on: ubuntu-latest    
     steps: 
