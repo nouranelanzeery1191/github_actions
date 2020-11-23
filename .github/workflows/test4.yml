@@ -15,7 +15,7 @@ on:
       - master
 env:
   platform: 'nonlive'
-  path: 'workflows' 
+  path: workflows
 jobs:
   createtest: 
     runs-on: ubuntu-latest
