@@ -5,7 +5,7 @@ on:
       git-ref: 
         description: Git Ref (Optional)    
         required: false
-      var:
+      environment:
         description: Environment to run this workflow on   
         required: true
         default: 'stage'
@@ -32,8 +32,8 @@ jobs:
         run: |
             echo "The current environment is" ${{ matrix.environment }}
       - name: Print Live Env.
-        if: github.event.inputs.var == 'stage'
+        if: github.event.inputs.environment == 'stage'
         #steps.changed-front.outputs.changed == 'true' && ${{ github.event.inputs.var }} == live
         run: |
             echo "Hello World!"
-            echo "The current environment is" ${{ github.event.inputs.var }}
+            echo "The current environment is" ${{ github.event.inputs.environment }}
