@@ -1,4 +1,9 @@
 name: 'WF_Disp_input'
+
+env:
+  platform: nonlive
+  path: workflows/test4.yml
+
 on:
   workflow_dispatch:
     inputs:
@@ -16,21 +21,30 @@ on:
 jobs:
   createtest: 
     runs-on: ubuntu-latest
-    strategy: 
-      matrix: 
-        environment: ["nonlive"]    
+    # strategy: 
+    #   matrix: 
+    #     environment: ["nonlive"]    
     steps:
+      - name: Test variables
+        run: |
+            echo "The current path is" ${path}
+            echo "The current environment is" ${platform}
+            echo "The current environment is" $platform
       - name: Checkout Repository
         uses: actions/checkout@v1
       - name: Check For Changes
         uses: marceloprado/has-changed-path@v1
         id: changed-front
         with:
-          paths: ./.github/
+          paths: ./.github/${{ env.path }}
       - name: Print Env name
-        if: steps.changed-front.outputs.changed == 'true' && ${{ matrix.environment }} == "nonlive"
+        if: steps.changed-front.outputs.changed == 'true' && env.platform == 'nonlive'
         run: |
-            echo "The current environment is" ${{ matrix.environment }}
+            echo "The current environment is" ${platform}
+            echo "The current environment is" $platform
+  Livetest: 
+    runs-on: ubuntu-latest    
+    steps: 
       - name: Print Live Env.
         if: github.event.inputs.environment == 'stage'
         #steps.changed-front.outputs.changed == 'true' && ${{ github.event.inputs.var }} == live
