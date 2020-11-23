@@ -1,5 +1,10 @@
-name: 'Infrastructure_Resources_Provisioning'
+name: 'Test_Multiple_Workflows'
 on:
+  workflow_dispatch:
+    inputs:
+      git-ref: 
+        description: Git Ref (Optional)    
+        required: false
   push:
     branches:
       - feature
@@ -9,31 +14,48 @@ on:
     branches:
         - master
 jobs:
-  ProvisionSharedResources: 
+  log-default-env:
     runs-on: ubuntu-latest
-    strategy: 
-      matrix: 
-        environment: ["infra"]
-        resources: ["vpc_setup"]     
     steps:
-      - name: Checkout
-        uses: actions/checkout@v2
-        with:
-          fetch-depth: 100
-      - name: Check_For_Changes
-        uses: marceloprado/has-changed-path@v1
-        id: changed-front
-        with:
-          paths: ./.github/workflows
-      - name: List o/p 
-        run: ls -al
-      - name: Print Curent Branch name
-        if: steps.changed-front.outputs.changed == 'true' 
-        run: | 
-          echo "This is running on branch ${GITHUB_REF##*/}"
-      - name: Test if condition
-        if: steps.changed-front.outputs.changed == 'true' && github.ref == 'master' && github.event.pull_request.merged == true
+      - name: Default Env Variables
         run: |
-          echo "if condition worked"
-            echo "running on branch ${GITHUB_REF##*/}"
+          echo "HOME: ${HOME}"
+          echo "GITHUB_WORKFLOW: ${GITHUB_WORKFLOW}"
+          echo "GITHUB_ACTION: ${GITHUB_ACTION}"
+          echo "GITHUB_ACTIONS: ${GITHUB_ACTIONS}"
+          echo "GITHUB_ACTOR: ${GITHUB_ACTOR}"
+          echo "GITHUB_REPOSITORY: ${GITHUB_REPOSITORY}"
+          echo "GITHUB_EVENT_NAME: ${GITHUB_EVENT_NAME}"
+          echo "GITHUB_WORKSPACE: ${GITHUB_WORKSPACE}"
+          echo "GITHUB_SHA: ${GITHUB_SHA}"
+          echo "GITHUB_REF: ${GITHUB_REF}"
+          echo "The WORKFLOW env variable is: ${WF_ENV}"
+          echo "The JOB env variable is: ${JOB_ENV}"
+          echo "The STEP env variable is: ${STEP_ENV}" 
+    # runs-on: ubuntu-latest
+    # strategy: 
+    #   matrix: 
+    #     environment: ["infra"]
+    #     resources: ["vpc_setup"]     
+    # steps:
+    #   - name: Checkout
+    #     uses: actions/checkout@v2
+    #     with:
+    #       fetch-depth: 100
+    #   - name: Check_For_Changes
+    #     uses: marceloprado/has-changed-path@v1
+    #     id: changed-front
+    #     with:
+    #       paths: ./.github/workflows
+    #   - name: List o/p 
+    #     run: ls -al
+    #   - name: Print Curent Branch name
+    #     if: steps.changed-front.outputs.changed == 'true' 
+    #     run: | 
+    #       echo "This is running on branch ${GITHUB_REF##*/}"
+    #   - name: Test if condition
+    #     if: steps.changed-front.outputs.changed == 'true' && github.ref == 'master' && github.event.pull_request.merged == true
+    #     run: |
+    #       echo "if condition worked"
+    #         echo "running on branch ${GITHUB_REF##*/}"
         
