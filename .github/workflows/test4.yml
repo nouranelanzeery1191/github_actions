@@ -4,7 +4,7 @@ env:
   platform: nonlive
   path: workflows/test4.yml
   Workflow_name: WF_Disp_input
-  #Badge: "![](https://github.com/OttoPaymentHub/barracuda_partner_accounting/workflows/${Workflow_name}/badge.svg?branch=${GITHUB_REF#refs/heads/}&event={GITHUB_EVENT_NAME})"
+  #Badge: "![](https://github.com/OttoPaymentHub/barracuda_partner_accounting/workflows/${Workflow_name}/badge.svg?branch=${GITHUB_REF#refs/heads/}&event=${GITHUB_EVENT_NAME})"
 
 
 on:
@@ -55,10 +55,11 @@ jobs:
       - name: Alternative
         run: |
           ls -al 
-          Badge="![](https://github.com/OttoPaymentHub/barracuda_partner_accounting/workflows/${Workflow_name}/badge.svg?branch=${GITHUB_REF#refs/heads/}&event={GITHUB_EVENT_NAME})"
-          Job_Status="${Workflow_name} | ${GITHUB_REF#refs/heads/} | {GITHUB_EVENT_NAME}| ${Badge}"
+          Badge="![](https://github.com/OttoPaymentHub/barracuda_partner_accounting/workflows/${Workflow_name}/badge.svg?branch=${GITHUB_REF#refs/heads/}&event=${GITHUB_EVENT_NAME})"
+          Job_Status="${Workflow_name} | ${GITHUB_REF#refs/heads/} | ${GITHUB_EVENT_NAME}| ${Badge}"
           echo "${Job_Status}"
           echo "${Badge}"
+          echo "${GITHUB_EVENT_NAME}"
           echo "${Job_Status}" > ./README.md
   Livetest: 
     runs-on: ubuntu-latest    
