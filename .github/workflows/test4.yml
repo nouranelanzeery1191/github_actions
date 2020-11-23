@@ -23,6 +23,11 @@ jobs:
     #   matrix: 
     #     environment: ["nonlive"]    
     steps:
+      - name: Test variables
+        run: |
+            echo "The current path is" ${path}
+            echo "The current environment is" ${platform}
+            echo "The current environment is" ${env.platform}
       - name: Checkout Repository
         uses: actions/checkout@v1
       - name: Check For Changes
