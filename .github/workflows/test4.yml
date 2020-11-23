@@ -3,7 +3,9 @@ name: 'WF_Disp_input'
 env:
   platform: nonlive
   path: workflows/test4.yml
-  Worrkflow_name: WF_Disp_input
+  Workflow_name: WF_Disp_input
+  #Badge: "![](https://github.com/OttoPaymentHub/barracuda_partner_accounting/workflows/${Workflow_name}/badge.svg?branch=${GITHUB_REF#refs/heads/}&event={GITHUB_EVENT_NAME})"
+
 
 on:
   workflow_dispatch:
@@ -50,6 +52,14 @@ jobs:
             echo ${GITHUB_REF#refs/heads/}
             echo ${GITHUB_EVENT_NAME}
             sh ./badges.sh "${{ env.Worrkflow_name }}" "${GITHUB_REF#refs/heads/}" "${GITHUB_EVENT_NAME}"
+      - name: Alternative
+        run: |
+          ls -al 
+          Badge="![](https://github.com/OttoPaymentHub/barracuda_partner_accounting/workflows/${Workflow_name}/badge.svg?branch=${GITHUB_REF#refs/heads/}&event={GITHUB_EVENT_NAME})"
+          Job_Status="${Workflow_name} | ${GITHUB_REF#refs/heads/} | {GITHUB_EVENT_NAME}| ${Badge}"
+          echo "${Job_Status}"
+          echo "${Badge}"
+          echo "${Job_Status}" > ./README.md
   Livetest: 
     runs-on: ubuntu-latest    
     steps: 
